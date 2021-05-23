@@ -1,0 +1,27 @@
+<ActionBar title="Mapbox Demo"></ActionBar>
+
+<Drawer class="drawer">
+    <GridLayout leftDrawer width="300" backgroundColor="white" rows="auto, *">
+        <StackLayout row="0">
+            <StackLayout backgroundColor="#eeeeee" padding="25">
+                <GridLayout columns="80, *" height="100">
+                    <StackLayout col="0" class="avatar">
+                        <Label text="JS"></Label>
+                    </StackLayout>
+                </GridLayout>
+                <StackLayout>
+                    <Label text="John Smith" fontWeight="bold"></Label>
+                    <Label text="john.smith@example.com"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout>
+                <Button text="Home" class="button" nsRouterLink="./home" nsRouterLinkActive="selected"></Button>
+            </StackLayout>
+        </StackLayout>
+    </GridLayout>
+
+    <StackLayout mainContent backgroundColor="white">
+        <router-outlet mainContent class="page page-content"></router-outlet>
+    </StackLayout>
+    
+</Drawer>

@@ -1,75 +1,59 @@
 /**
-* Mapbox NativeScript Angular Demo Home Page
-*
-* @author Yermo Lamers, Flying Brick Software, LLC
-*/
+ * Mapbox NativeScript Angular Demo Home Page
+ *
+ * @author Yermo Lamers, Flying Brick Software, LLC
+ */
 
-import {
-  Component,
-  OnInit,
-  OnDestroy
-} from "@angular/core";
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 // for the side drawer
 
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "@nativescript/core/application";
+import * as app from '@nativescript/core/application';
 
 // for the alerts
 
-import { RouterExtensions } from "@nativescript/angular";
-
-import { openAppSettings } from "nativescript-advanced-permissions/core";
-
-import {
-  hasLocationPermissions,
-  requestLocationPermissions,
-  isLocationEnabled
-} from "nativescript-advanced-permissions/location";
+import { RouterExtensions } from '@nativescript/angular';
 
 // the Mapbox access token and the Mapbox map style to use are set
 // in the config.ts file.
 
-import { SETTINGS } from "../../../../../mapbox_config";
+import { SETTINGS } from '../../../../../mapbox_config';
+import { Drawer } from '@nativescript-community/ui-drawer';
 
 // ------------------------------------------------------------------------------
 
 /**
-* Home Page - The Live Map
-*
-* This is the main page of the app that, when tracking, displays the current live ride.
-*/
+ * Home Page - The Live Map
+ *
+ * This is the main page of the app that, when tracking, displays the current live ride.
+ */
 
 @Component({
-    selector: "home-page",
+    selector: 'home-page',
     moduleId: module.id,
-    templateUrl: "./home-page.component.html"
+    templateUrl: './home-page.component.html'
 })
 export class HomePageComponent implements OnInit, OnDestroy {
+    settings: any = SETTINGS;
 
-  settings: any = SETTINGS;
+    locationPermission: boolean = false;
 
-  locationPermission: boolean = false;
+    eventHandlersRegistered: boolean = false;
 
-  eventHandlersRegistered: boolean = false;
+    distanceSubscription: any;
 
-  distanceSubscription: any;
+    // -----------------------------------------------------
 
-  // -----------------------------------------------------
+    constructor(private routerExtensions: RouterExtensions) {
+        console.log('HomePageComponent:constructor()');
+    } // end of constructor
 
-  constructor(
-    private routerExtensions: RouterExtensions
-  ) {
-    console.log("HomePageComponent:constructor()");
-  } // end of constructor
+    // -----------------------------------------------------
 
-  // -----------------------------------------------------
+    ngOnInit(): void {
+        console.log('HomePageComponent:ngOnInit(): checking for location services.');
 
-  ngOnInit(): void {
-
-    console.log("HomePageComponent:ngOnInit(): checking for location services.");
-
-/** ----------------------------------------------------------------
+        /** ----------------------------------------------------------------
 * temporarily disabled
 
     if ( ! isLocationEnabled ) {
@@ -117,25 +101,24 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
 
 ---------------------------------------------- */
-  }
+    }
 
-  // -------------------------------------------------
+    // -------------------------------------------------
 
-  /**
-  * destroy
-  *
-  * @link https://docs.nativescript.org/angular/core-concepts/angular-navigation#custom-route-reuse-strategy
-  */
+    /**
+     * destroy
+     *
+     * @link https://docs.nativescript.org/angular/core-concepts/angular-navigation#custom-route-reuse-strategy
+     */
 
-  ngOnDestroy() {
-  }
+    ngOnDestroy() {}
 
-  // -----------------------------------------------------
+    // -----------------------------------------------------
 
-  onDrawerButtonTap(): void {
-    const sideDrawer = <RadSideDrawer>app.getRootView();
-    sideDrawer.showDrawer();
-  }
+    onDrawerButtonTap(): void {
+        const sideDrawer = app.getRootView() as Drawer;
+        sideDrawer.open();
+    }
 }
 
 // END
