@@ -3,19 +3,9 @@ import { NativeScriptRouterModule } from '@nativescript/angular';
 import { Routes } from '@angular/router';
 
 import { HomePageComponent } from './pages/home/home-page.component';
-import { DrawerWrapperComponent } from './pages/drawer-wrapper/drawer-wrapper.component';
+import { pages } from './pages';
 
-const routes: Routes = [
-    { path: '', redirectTo: '/drawer/home', pathMatch: 'full' },
-    {
-        path: 'drawer',
-        component: DrawerWrapperComponent,
-        children: [
-            { path: '', redirectTo: '/home', pathMatch: 'full' },
-            { path: 'home', component: HomePageComponent }
-        ]
-    }
-];
+const routes: Routes = [{ path: '', redirectTo: '/home', pathMatch: 'full' }, { path: 'home', component: HomePageComponent }, ...pages];
 
 @NgModule({
     imports: [NativeScriptRouterModule.forRoot(routes)],

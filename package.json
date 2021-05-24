@@ -25,6 +25,8 @@
         "commitmsg": "commitlint -e $GIT_PARAMS",
         "demo.ios": "npm run build && cd ./demo && ns run ios",
         "demo.android": "npm run build && cd ./demo && ns run android",
+        "demo-ng.ios": "npm run build && cd ./demo-angular && ns run ios",
+        "demo-ng.android": "npm run build && cd ./demo-angular && ns run android",
         "demo.android.build": "npm run build && cd ./demo && ns build android --log debug",
         "eslint": "eslint 'src/**/*.ts' --fix",
         "prepublishOnly": "npm run build",

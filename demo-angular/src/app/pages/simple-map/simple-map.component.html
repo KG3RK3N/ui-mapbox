@@ -1,0 +1,9 @@
+<ActionBar title="Simple Map" class="action-bar">
+    <NavigationButton icon="res://ic_arrow_back_black_24dp" nsRouterLink="../"></NavigationButton>
+</ActionBar>
+
+<GridLayout>
+    <map id="mainMap"
+        [style]="settings.mapbox_style"
+        [access_token]="settings.mapbox_access_token"></map>
+</GridLayout>

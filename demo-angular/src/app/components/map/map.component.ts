@@ -57,14 +57,12 @@ registerElement('Mapbox', () => require('@nativescript-community/ui-mapbox').Map
     moduleId: module.id,
     template: `
         <StackLayout height="100%" width="100%">
-            <ContentView height="100%" width="100%">
+            <ContentView height="100%" width="100%" *ngIf="shown">
                 <Mapbox
                     accessToken="{{ access_token }}"
                     mapStyle="{{ style }}"
-                    latitude="{{ fallbackLatitude }}"
-                    longitude="{{ fallbackLongitude }}"
                     zoomLevel="10"
-                    delay="10"
+                    delay="100"
                     showUserLocation="false"
                     hideCompass="false"
                     hideAttribution="false"
@@ -74,7 +72,6 @@ registerElement('Mapbox', () => require('@nativescript-community/ui-mapbox').Map
                     disableScroll="false"
                     disableTilt="false"
                     (mapReady)="onMapReady($event)"
-                    (moveBeginEvent)="onMoveBegin($event)"
                     (locationPermissionGranted)="onLocationPermissionGranted()"
                     (locationPermissionDenied)="onLocationPermissionDenied()"
                 >
@@ -112,13 +109,13 @@ export class MapComponent implements OnInit, OnDestroy {
      * The map template
      */
 
-    @ViewChild('mapTemplate', { static: false }) mapTemplate;
+    @ViewChild('mapTemplate', { static: true }) mapTemplate;
 
     /**
      * the reference to the element that contains the map.
      */
 
-    @ViewChild('mapContainer', { read: ViewContainerRef, static: false }) mapContainer;
+    @ViewChild('mapContainer', { read: ViewContainerRef, static: true }) mapContainer;
 
     mapboxView: MapboxViewApi = null;
     mapboxApi: Mapbox = null;
@@ -334,6 +331,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
         this.mapboxView.destroy();
     }
+
 
     // ---------------------------------------------------------------------------------------
 

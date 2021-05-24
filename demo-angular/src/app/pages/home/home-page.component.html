@@ -1,9 +1,16 @@
-<map id="mainMap"
-    [style]="settings.mapbox_style"
-    [access_token]="settings.mapbox_access_token"
+<ActionBar title="NS Mapbox Examples" class="action-bar"></ActionBar>
 
-    [fallbackLatitude]="39.007846" 
-    [fallbackLongitude]="-76.947041">
-
-</map>
-
+<ScrollView>
+    <WrapLayout>
+        <MDCardView margin="16" *ngFor="let page of pages" [nsRouterLink]="['/', page.path]">
+            <StackLayout padding="24">
+                <Image [src]="page.imageUrl"></Image>
+                <Label
+                    [text]="page.title"
+                    fontSize="20"
+                    marginTop="16"
+                ></Label>
+            </StackLayout>
+        </MDCardView>
+    </WrapLayout>
+</ScrollView>

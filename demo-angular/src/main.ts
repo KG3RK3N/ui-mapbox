@@ -3,7 +3,13 @@ import { platformNativeScriptDynamic } from '@nativescript/angular';
 
 import { AppModule } from './app/app.module';
 
-import { install } from '@nativescript-community/ui-drawer';
-install();
+import { installMixins, themer } from '@nativescript-community/ui-material-core';
+installMixins();
+
+if (global.isIOS) {
+    themer.setPrimaryColor('#bff937');
+    themer.setAccentColor('#ff8a39');
+    themer.setSecondaryColor('#a830d7');
+}
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);

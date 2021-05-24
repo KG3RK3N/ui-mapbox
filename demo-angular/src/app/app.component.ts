@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    moduleId: module.id,
     selector: 'ns-app',
-    templateUrl: 'app.component.html'
+    moduleId: module.id,
+    template: '<GridLayout><page-router-outlet></page-router-outlet></GridLayout>'
 })
 export class AppComponent {}
